@@ -1,0 +1,22 @@
+#+TITLE: Starter Kit CSharp
+#+OPTIONS: toc:nil num:nil ^:nil
+
+This is part of the [[file:starter-kit.org][Emacs Starter Kit]].
+
+* Starter kit CSharp
+
+Support for the C Sharp programming language.
+
+#+begin_src emacs-lisp
+(require 'flymake)
+(autoload 'csharp-mode "csharp-mode" "Mode for editing C# source files." t)
+(add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
+(defun my-csharp-mode-fn ()
+     "function that runs when csharp-mode is initialized for a buffer."
+     (turn-on-auto-revert-mode)
+     (setq indent-tabs-mode nil)
+     (require 'yasnippet)
+     (yas/minor-mode-on)
+  )
+(add-hook  'csharp-mode-hook 'my-csharp-mode-fn t)
+#+end_src
