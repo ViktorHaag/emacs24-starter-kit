@@ -1,0 +1,17 @@
+#+TITLE: Starter Kit Go
+#+OPTIONS: toc:nil num:nil ^:nil
+
+This is part of the [[file:starter-kit.org][Emacs Starter Kit]].
+
+* Starter kit Go
+
+Support for the Go programming language.
+
+** Use go-mode-load
+   :PROPERTIES:
+   :CUSTOM_ID: go
+   :END:
+The go-mode package loads go-mode using a loader file, so we require that here.
+#+begin_src emacs-lisp
+(require 'go-mode-load)
+#+end_src
