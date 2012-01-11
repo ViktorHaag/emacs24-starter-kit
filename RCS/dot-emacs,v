@@ -1,0 +1,1424 @@
+head	1.6;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.6
+date	2011.11.08.15.23.37;	author vhaag;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2011.10.27.14.38.25;	author vhaag;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2011.10.24.13.43.34;	author vhaag;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2009.05.19.14.21.46;	author vhaag;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2009.05.19.13.52.05;	author vhaag;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.05.03.03.29.47;	author vhaag;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.6
+log
+@windup
+@
+text
+@; $Id: .emacs,v 1.5 2011/10/27 14:38:25 vhaag Exp vhaag $	
+
+; (garbage-collect)
+
+;;; set lisp processing parameters
+(setq max-lisp-eval-depth 600)
+
+;;; start emacs-client server
+(server-start)
+
+;;; set up load path
+(setq my-load-path
+      (list
+       (expand-file-name "~/lib/lisp")
+       (expand-file-name "/usr/local/share/emacs/site-lisp")
+       (expand-file-name "/usr/local/share/emacs/site-lisp/bbdb")
+       (expand-file-name "/usr/local/share/emacs/site-lisp/color-theme-el")
+       (expand-file-name "/usr/local/share/emacs/site-lisp/dictionary")
+       (expand-file-name "/usr/local/share/emacs/site-lisp/eshell")
+       (expand-file-name "/usr/local/share/emacs/site-lisp/doxymacs")
+       (expand-file-name "/usr/local/share/emacs/site-lisp/ljupdate")
+       (expand-file-name "/usr/local/share/emacs/site-lisp/mailcrypt")
+       (expand-file-name "/usr/local/share/emacs/site-lisp/muse")
+       (expand-file-name "/usr/local/share/emacs/site-lisp/nxhtml")
+       (expand-file-name "/usr/local/share/emacs/site-lisp/psgml")
+       (expand-file-name "/usr/local/share/emacs/site-lisp/ps-print")
+       (expand-file-name "/usr/local/share/emacs/site-lisp/url")
+       (expand-file-name "/usr/local/share/emacs/site-lisp/vm")
+       ))
+(setq load-path (append my-load-path load-path))
+
+;;; set up info path
+(setq Info-additional-directory-list (quote
+                                      ("/usr/local/info" "/usr/share/info" "/sw/share/info"))
+      )
+
+;; requires of fundamental packages
+(require 'cl)
+(require 'psvn)
+
+;; loads of fundamental packages
+                                        ; (load-library "p4")
+(load "localfun")
+(load "applescript")
+
+;; set up exec path
+(setq exec-path 
+      (quote 
+       ("/sw/bin" 
+        "/sw/sbin"
+        "/usr/local/bin"
+        "/usr/bin"
+        "/bin"
+        "/Users/vhaag/bin" 
+        "/Applications/Emacs.app/Contents/MacOS/libexec"
+        "/Applications/Emacs.app/Contents/MacOS/bin"
+        nil))
+      )
+
+;; This depends upon having fink coreutils installed, putting the GNU utils
+;; into the path with 'g' prefixes. If we have GNU ls in place as 'ls' then
+;; we don't need this block.
+(require 'ls-lisp)
+(setq ls-lisp-use-insert-directory-program  t)
+(setq insert-directory-program (purecopy "gls"))
+
+;; M-x mac-font-panel-mode to open the Mac font chooser
+;; M-x describe font to get help description for (current) font
+;; create font sets
+(create-fontset-from-fontset-spec
+ "-apple-andale mono-medium-r-normal--12-*-*-*-*-*-fontset-mac,
+ascii:-apple-andale mono-medium-r-normal--12-*-*-*-m-*-mac-roman,
+latin-iso8859-1:-apple-andale mono-medium-r-normal--12-*-*-*-m-*-mac-roman,
+mule-unicode-0100-24ff:-apple-andale mono-medium-r-normal--12-*-*-*-m-*-mac-roman")
+(create-fontset-from-fontset-spec
+ "-apple-inconsolata-medium-r-normal--12-*-*-*-*-*-fontset-mac,
+ascii:-apple-inconsolata-medium-r-normal--12-*-*-*-*-*-iso10646-1,
+latin-iso8859-1:-apple-inconsolata-medium-r-normal--12-*-*-*-*-*-iso10646-1,
+mule-unicode-0100-24ff:-apple-inconsolata-medium-r-normal--12-*-*-*-*-*-iso10646-1")
+(create-fontset-from-fontset-spec
+ "-apple-lucida grande-*-*-normal--12-*-*-*-*-*-fontset-mac,
+ascii:-apple-lucida grande-*-*-normal--12-*-*-*-m-*-mac-roman,
+latin-iso8859-1:-apple-lucida grande-*-*-normal--12-*-*-*-m-*-mac-roman,
+mule-unicode-0100-24ff:-apple-lucida grande-*-*-normal--12-*-*-*-m-*-mac-roman")
+(setq x-fixed-font-alist
+      '("Font Menu"
+        ("My Fonts"
+         ("Andale Mono 12" "-apple-andale mono-medium-r-normal--12-*-*-*-*-*-fontset-mac")
+         ("Inconsolata 12" "-apple-inconsolata-medium-r-normal--12-*-*-*-*-*-fontset-mac")
+         ("Lucida Console 12" "-apple-lucida console-*-*-normal--12-*-*-*-*-*-fontset-mac")
+         ("Lucida Grande 12" "-apple-lucida grande-*-*-normal--12-*-*-*-*-*-fontset-mac")
+         )))
+
+(blink-cursor-mode nil)
+(setq cursor-in-non-selected-windows nil)
+(setq scalable-fonts-allowed t)
+(tool-bar-mode -1)
+(setq mac-allow-anti-aliasing t)
+
+(setq default-frame-alist
+      '(
+        (cursor-color . "red")
+        (font . "-apple-inconsolata-medium-r-normal--12-*-*-*-*-*-iso10646-1")
+        (foreground-color . "black")
+        (background-color . "white")
+        (menu-bar-lines . 1)
+        (width . 95)
+        (height . 45)
+        ))
+
+;; restore SPC as completion key behaviour in minibuffer
+(define-key minibuffer-local-filename-completion-map (kbd "SPC")
+  'minibuffer-complete-word)
+
+(define-key minibuffer-local-must-match-filename-map (kbd "SPC")
+  'minibuffer-complete-word)
+
+;;; set font locking and frame attibutes
+(global-font-lock-mode t)
+(setq-default 
+ font-lock-support-mode 'jit-lock-mode
+ )
+
+
+;; color theme handling
+(require 'color-theme)
+(color-theme-initialize)
+(load "color-theme-viktor")
+(add-to-list 'color-themes 
+             '(color-theme-viktor 
+               "Viktor's Theme" 
+               "Viktor Haag <viktor_haag@@mac.com>"))
+(color-theme-viktor)
+
+;; load jde_load to load all the poo needed for the JDE packaage
+                                        ;(load "jde_load.el")
+
+;; eshell loading and configuration
+;; (load "eshell-auto")
+;; (load "em-joc")
+;; (setq eshell-modules-list 
+;;       (quote 
+;;        (eshell-alias
+;;         eshell-banner
+;;         eshell-basic
+;;         eshell-cmpl
+;;         eshell-dirs
+;;         eshell-glob
+;;         eshell-hist
+;;         eshell-joc
+;;         eshell-ls
+;;         eshell-pred
+;;         eshell-prompt
+;;         eshell-script
+;;         eshell-smart
+;;         eshell-term
+;;         eshell-unix
+;;         eshell-xtra
+;;         )))
+;; (setq eshell-prompt-function 
+;;       (quote 
+;;        joc-eshell-prompt
+;;        ))
+;; (setq joc-eshell-prompt-newline t)
+
+;; spelling settings (note requires fink install of ispell)
+(setq ispell-program-name "/sw/bin/ispell")
+
+;; SVN settings
+(setq svn-status-verbose nil)
+
+
+;;;;
+;;;; Mode configurations
+;;;;
+
+(setq default-major-mode 'text-mode)
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+;;; Nroff mode configuration
+(add-hook 'nroff-mode-hook
+          (function
+           (lambda ()
+             "Don't fill nroff commands"
+             (setq auto-fill-inhibit-regexp "^\\."))))
+
+
+;; ;;;
+;; ;;; SGML configuration
+;; ;;;
+;; I'm not keen on the way XAE works; uncomment this to enable it
+                                        ;  (require 'xae)
+
+(autoload 'sgml-mode "psgml" "Major mode to edit SGML files")
+                                        ; (autoload 'xml-mode "psgml" "Major mode to edit XML files")
+(load "/usr/local/share/emacs/site-lisp/nxhtml/autostart.el")
+
+;; stomp Emacs' default HTML mode and wrap around SGML (psgml) mode
+(defun html-mode ()
+  (interactive)
+  (sgml-mode)
+  )
+
+;; mode hook for SGML mode 
+(add-hook 'sgml-mode-hook 
+          (function (lambda ()
+                      "Extra mode hooks for SGML mode"
+                      
+                                        ; search path for ecatalog files
+                      ;;                      (setq sgml-ecat-files
+                      ;;                             (list
+                      ;;                              "ecatalog"
+                      ;;                              "/usr/local/lib/sgml/ecatalog"
+                      ;;                              ))
+                      
+                                        ; search path for catalog files
+                      (setq sgml-catalog-files
+                            (list
+                             "catalog"
+                             "/usr/local/lib/sgml/catalog"
+                             "/usr/local/lib/ents/iso-entities.cat"
+                             ))
+                      
+                                        ; custom DTDs
+                      (setq sgml-custom-dtd
+                            '(
+                              ( "HTML 3.2"
+                                "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 3.2 Final//EN\">")
+                              ( "HTML 4"
+                                "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\">")
+                              ("XHTML 1"
+                               "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"  \"/usr/local/lib/sgml/dtds/xhtml/xhtml1-transitional\">")
+                              ("DITA Composite (Base)"
+                               "<!DOCTYPE TOPIC PUBLIC \"-//OASIS//DTD DITA Composite//EN\" \"/usr/local/lib/sgml/dtds/dita/ditabase.dtd\">")
+                              ("DITA Concept"
+                               "<!DOCTYPE TOPIC PUBLIC \"-//OASIS//DTD DITA Concept//EN\" \"/usr/local/lib/sgml/dtds/dita/concept.dtd\">")
+                              ("DITA Map"
+                               "<!DOCTYPE TOPIC PUBLIC \"-//OASIS//DTD DITA Map//EN\" \"/usr/local/lib/sgml/dtds/dita/map.dtd\">")
+                              ("DITA Reference"
+                               "<!DOCTYPE TOPIC PUBLIC \"-//OASIS//DTD DITA Reference//EN\" \"/usr/local/lib/sgml/dtds/dita/reference.dtd\">")
+                              ("DITA Task"
+                               "<!DOCTYPE TOPIC PUBLIC \"-//OASIS//DTD DITA Task//EN\" \"/usr/local/lib/sgml/dtds/dita/task.dtd\">")
+                              ("DITA Topic"
+                               "<!DOCTYPE TOPIC PUBLIC \"-//OASIS//DTD DITA Topic//EN\" \"/usr/local/lib/sgml/dtds/dita/topic.dtd\">")
+                              ))
+                      
+                                        ; declarations
+                      (setq sgml-declaration "/usr/local/lib/sgml/dcls/sgml.dcl")
+                      (setq sgml-xml-declaration "/usr/local/lib/sgml/dcls/xml.dcl")
+                      
+                                        ; validation
+                      (setq sgml-validate-command "onsgmls -s %s %s")
+                      (setq sgml-xml-validate-command "onsgmls -wxml -s %s %s")
+                      
+                                        ; global preference overrides
+                      (set-fill-column 80)
+                      
+                                        ; SGML mode preference defaults
+                      (setq sgml-offer-save t)
+                      
+                      (setq sgml-omittag t)
+                      (setq sgml-shorttag t)
+                      (setq sgml-always-quote-attributes t)
+                      (setq sgml-minimize-attributes nil)
+                      
+                      (setq sgml-balanced-tag-edit t)
+                      (setq sgml-auto-insert-required-elements t)
+                      (setq sgml-ommittag-transparent t)
+                      (setq sgml-tag-region-if-active t)
+                      (setq sgml-insert-missing-element-comment t)
+                      (setq sgml-insert-end-tag-on-new-line t)
+                      
+                      (setq sgml-indent-step 1)
+                      (setq sgml-indent-data t)
+                      
+                      (setq sgml-normalize-trims t)
+                      
+                                        ; highlighting markup -- note that the faces are defined in color-theme-viktor.el
+                      (setq sgml-set-face t)
+                      (setq sgml-markup-faces
+                            '((comment . sgml-comment-face)
+                              (doctype . sgml-doctype-face)
+                              (end-tag . sgml-end-tag-face)
+                              (entity . sgml-entity-face)
+                              (ignored . sgml-ignored-face)
+                              (ms-end . sgml-ms-end-face)
+                              (ms-start . sgml-ms-start-face)
+                              (pi . sgml-pi-face)
+                              (sgml . sgml-sgml-face)
+                              (short-ref . sgml-short-ref-face)
+                              (start-tag . sgml-start-tag-face)))
+                      )) ; lambda function
+          ) ; sgml-mode-hook
+
+
+
+;;; Appelscript configuration
+(add-to-modelist "\\.osa$" 'applescript-mode)
+
+;;;
+;;; Perl configuration
+;;;
+(add-to-modelist "\\.pl$" 'perl-mode)
+
+
+;;;
+;;; Python configuration
+;;;
+(add-to-modelist "\\.py$" 'python-mode)
+(setq interpreter-mode-alist
+      (cons '("python" . python-mode)
+            interpreter-mode-alist))
+(autoload 'python-mode "python-mode"
+  "Python editing mode." t)
+
+;;;
+;;; PHP configuration
+;;;
+(add-to-modelist "\\.php$" 'php-mode)
+(add-to-modelist "\\.php5$" 'php-mode)
+(autoload 'php-mode "php-mode"
+  "PHP editing mode." t)
+
+;;;
+;;; ReST mode configuration
+;;;
+(require 'rst)
+(add-hook 'rst-mode-hook 
+           (function
+            (lambda ()
+              "Nuke the default rst-mode abbrev table"
+              (clear-abbrev-table rst-mode-abbrev-table))))
+
+
+;;;
+;;; Scheme configuration
+;;;
+(setq scheme-mit-dialect nil)
+(setq scheme-program-name "scheme48")
+
+
+;;;
+;;; Graphviz configuration
+;;;
+;; note that mode source file makes file assoc to *.dot files
+(load-file (expand-file-name "/usr/local/share/emacs/site-lisp/graphviz-dot-mode.el"))
+(setq graphviz-dot-dot-program "/usr/local/graphviz/bin/dot")
+(setq graphviz-dot-auto-indent-on-braces nil)
+(setq graphviz-dot-auto-indent-on-semi nil)
+(setq graphviz-dot-indent-width 4)
+
+;; ljupdate settings
+(require 'ljupdate)
+(setq lj-default-username "viktor_haag")
+;; muse settings
+(require 'muse-mode)
+(require 'muse-html)
+(require 'muse-texinfo)
+(require 'muse-project)
+
+;; tramp settings
+; (require 'tramp)
+; (setq tramp-default-method "scp")
+
+;; WoMan settings
+(autoload 'woman "woman"
+  "Decode and browse a UNIX man page." t)
+(autoload 'woman-find-file "woman"
+  "Find, decode, and browse a specific UNIX man page." t)
+(autoload 'woman-dired-find-file "woman"
+  "In dired, run the WoMan man-page browser on this file." t)
+
+
+;; Dictionary settings
+(load "dictionary-init")
+
+;;;
+;;; Mail/News/Web configuration
+;;;
+;; basic SMTP config
+(require 'vm-autoload) ; required to set vm-user-agent as default mail user agent
+;; add .vm to the mode list so that we get elisp mode when we want to edit the config file
+(add-to-modelist "\\.vm$" 'emacs-lisp-mode)
+(setq mail-user-agent 'vm-user-agent)
+(setq user-full-name "Viktor Haag")
+(setq user-mail-address "Viktor.Haag@@Desire2Learn.com")
+(setq smtpmail-default-smtp-server "smtp.desire2learn.d2l")
+(setq smtpmail-smtp-service "smtp")
+(setq send-mail-function 'smtpmail-send-it)
+(setq message-send-mail-function 'smtpmail-send-it)
+(setq smtpmail-debug-info t)
+(load-library "smtpmail")
+(load-library "message")
+(setq mail-use-rfc822 t)
+
+;; LDAP config
+(setq eudc-protocol (quote ldap))
+(require 'eudc) ; must come after basic eudc config settings
+
+;; BBDB config
+(require 'bbdb)
+                                        ; (bbdb-initialize 'gnus 'message 'sendmail 'w3)
+(bbdb-initialize 'gnus 'message 'sendmail)
+(setq bbdb-use-pop-up nil)
+(setq bbdb/mail-auto-create-p 'bbdb-ignore-most-messages-hook)
+(setq bbdb-quiet-about-name-mismatches t)
+(setq bbdb-silent-running t)
+(add-hook 'mail-setup-hook 'bbdb-define-all-aliases)
+;; Use abbrevs (expanded right away) instead of aliases (expanded
+;; when sent) for aliases defined in the .mailrc or bbdb
+(add-hook 'mail-setup-hook 'mail-abbrevs-setup)
+(add-hook 'mail-setup-hook
+          '(lambda ()
+             (define-key mail-mode-map [(control ?c) (tab)] 'eudc-expand-inline)
+             (substitute-key-definition
+              'next-line 'mail-abbrev-next-line
+              mail-mode-map global-map)
+             (substitute-key-definition
+              'end-of-buffer 'mail-abbrev-end-of-buffer
+              mail-mode-map global-map)))
+
+
+;; Mailcrypt config
+(require 'mailcrypt)
+(mc-setversion "gpg")
+(setq mc-gpg-path "/sw/bin/gpg")
+(autoload 'mc-install-write-mode "mailcrypt" nil t)
+(autoload 'mc-install-read-mode "mailcrypt" nil t)
+(add-hook 'mail-mode-hook 'mc-install-write-mode)
+(add-hook 'rmail-show-message-hook 'mc-install-read-mode)
+(add-hook 'rmail-summary-mode-hook 'mc-install-read-mode)
+
+;; VM config
+(autoload 'vm "vm" "Start VM on your primary inbox." t)
+(autoload 'vm-other-frame "vm" "Like `vm' but starts in another frame." t)
+(autoload 'vm-visit-folder "vm" "Start VM on an arbitrary folder." t)
+(autoload 'vm-visit-virtual-folder "vm" "Visit a VM virtual folder." t)
+(autoload 'vm-mode "vm" "Run VM major mode on a buffer" t)
+(autoload 'vm-mail "vm" "Send a mail message using VM." t)
+(autoload 'vm-submit-bug-report "vm" "Send a bug report about VM." t)
+
+(setq mail-signature t)
+
+;; x-face hook
+(add-hook 'mail-setup-hook 'mail-insert-x-face)
+
+;; hooks to force Read Mail and Send Mail in menubar to use VM
+(define-key menu-bar-tools-menu [rmail] '("Read Mail" . vm))
+(define-key menu-bar-tools-menu [smail] '("Send Mail" . vm-mail))
+
+;; ssl config
+(setq ssl-program-name "openssl")
+(setq ssl-program-arguments 
+      (quote ("s_client" 
+              "-connect" 
+              host 
+              "-quiet" 
+              "-verify" 
+              (int-to-string ssl-certificate-verification-policy) 
+              "-CApath" 
+              ssl-certificate-directory
+              )))
+(setq ssl-certificate-directory-style 
+      (quote openssl))
+
+
+
+;; browserurl configuration
+;;; sigh, for some reason, it seems like we need to require this package...
+(require 'browse-url)
+;;; this no longer seems to be needed: it appears that Emacs can
+;;; intuit this from the system environment.
+;;; (setq browse-url-browser-function 'browse-url-default-macosx-browser)
+(setq browse-url-new-window-p t)
+(setq url-mail-command (quote vm-mail))
+(setq url-personal-mail-address "Viktor.Haag@@Desire2Learn.com")
+(setq url-privacy-level (quote high))
+
+
+;;;
+;;; Printing configuration
+;;;
+; (setq ps-printer-name "hp9040")
+(setq ps-font-size (quote (8 . 8)))
+(setq ps-footer-font-size (quote (8 . 8)))
+(setq ps-header-font-size (quote (8 . 8)))
+(setq ps-header-title-font-size (quote (8 . 8)))
+(setq ps-footer-lines 1)
+(setq ps-header-lines 1)
+(setq ps-print-footer-frame nil)
+(setq ps-print-header-frame nil)
+(setq ps-print-header t)
+(setq ps-print-only-one-header t)
+(setq ps-right-header (quote ("/pagenumberstring load")))
+(setq ps-spool-duplex t)
+
+
+;; (setq ps-footer-offset 18)
+;; (setq ps-header-offset 18)
+;; (setq ps-inter-column 18)
+;; (setq ps-left-margin 18)
+;; (setq ps-n-up-border-p nil)
+;; (setq ps-n-up-margin 18)
+;; (setq ps-postscript-code-directory "/usr/local/share/emacs/site-lisp/ps-print")
+;; (setq ps-print-color-p nil)
+;; (setq ps-print-prologue-header "%%+ LanguageLevel: 2\\n")
+;; (setq ps-right-margin 18)
+;; (setq ps-top-margin 18)
+;; (setq ps-bottom-margin 18)
+
+
+;;;
+;;; Version control configuraiton
+;;;
+(setq vc-consult-headers nil)
+(setq vc-default-back-end (quote RCS))
+(setq vc-initial-comment t)
+(setq vc-make-backup-files t)
+(setq vc-mistrust-permissions t)
+(setq vc-rcsdiff-knows-brief (quote no))
+(setq vc-master-templates 
+      (quote 
+       (("%srcs/%s" . RCS) 
+        ("%sRCS/%s" . RCS) 
+        ("%s%s,v" . RCS) 
+        ("%sRCS/%s,v" . RCS) 
+        ("%sSCCS/s.%s" . SCCS) 
+        ("%ss.%s" . SCCS) 
+        vc-find-cvs-master 
+        vc-search-sccs-project-dir
+        )))
+
+
+;;;
+;;; Miscelleaneous variable settings
+;;;
+(setq default-major-mode 'indented-text-mode)
+
+(setq-default abbrev-mode t)
+(read-abbrev-file "~vhaag/.abbrev_defs")
+(setq save-abbrevs t)
+(setq-default case-fold-search nil)
+(setq-default column-number-mode t)
+(display-time-mode t)
+(setq-default indent-tabs-mode nil)
+(setq-default inhibit-startup-message t)
+(setq-default fill-column 80)
+(setq-default line-number-mode t)
+(setq-default make-backup-files nil)
+(setq-default next-line-add-newlines nil)
+(setq-default require-final-newline t)
+(setq-default scroll-step 1)
+(setq-default track-eol t)
+(setq-default url-be-asynchronous t)
+(setq-default visible-bell t)
+(scroll-bar-mode -1)
+
+
+                                        ; Maximum size of menu to fontify if `Info-fontify' is non-nil.
+                                        ; Increased from default of 30000 for elisp manual main menu
+(setq Info-fontify-maximum-menu-size 40000)
+
+                                        ; Lambda func to query a kill emacs
+(add-hook 'kill-emacs-query-functions
+          (lambda () (y-or-n-p "Really kill Emacs? ")))
+
+
+;;;
+;;; Keyboard setup
+;;;
+;; custom keypad settings
+(global-set-key [kp-decimal] 'delete-char)    ; .
+(global-set-key [kp-delete] 'delete-char) ; Delete
+(global-set-key [kp-0] 'auto-fill-mode) ; shift-keypad-0
+(global-set-key [kp-7] 'backward-word)  ; 7
+(global-set-key [kp-8] 'previous-line)  ; 8
+(global-set-key [kp-9] 'forward-word)   ; 9
+(global-set-key [kp-4] 'backward-char)  ; 4
+(global-set-key [kp-5] 'recenter)       ; 5
+(global-set-key [kp-6] 'forward-char)   ; 6
+(global-set-key [kp-1] 'beginning-of-line) ; 1
+(global-set-key [kp-2] 'next-line)      ; 2
+(global-set-key [kp-3] 'end-of-line)    ; 3
+
+(global-set-key [kp-divide] 'beginning-of-buffer) ; PF1
+(global-set-key [kp-multiply] 'end-of-buffer) ; PF2
+(global-set-key [kp-subtract] 'scroll-down)   ; PF3
+(global-set-key [kp-add] 'scroll-up)     ; PF4
+
+(global-set-key [home] 'beginning-of-buffer)
+(global-set-key [end]  'end-of-buffer)
+
+;; swap out query-replace for query-replace-regexp
+;; (global-set-key "\M-%" 'query-replace-regexp)
+
+;; fudge mac key combo to rotate through app windows
+(global-set-key "\M-`" 'other-frame)
+
+
+
+;; evaluate after setting face bindings?
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(desktop-path (quote ("~/.emacs.d/desktops/")))
+ '(desktop-save-mode t)
+ '(gpm-mouse-mode t)
+ '(jde-imenu-sort (quote asc))
+ '(jde-jdk-registry (quote (("1.5.0" . "/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0"))))
+ '(mouse-wheel-scroll-amount (quote (1 ((shift) . 5) ((control)))))
+ '(ns-alternate-modifier (quote alt))
+ '(ns-command-modifier (quote meta)))
+@
+
+
+1.5
+log
+@*** empty log message ***
+@
+text
+@d1 1
+a1 1
+; $Id: .emacs,v 1.4 2011/10/24 13:43:34 vhaag Exp vhaag $	
+d24 1
+a24 1
+;       (expand-file-name "/usr/local/share/emacs/site-lisp/nxhtml")
+d196 1
+a196 1
+; (load "/usr/local/share/emacs/site-lisp/nxhtml/autostart.el")
+a299 7
+;;; C-Sharp configuration
+(autoload 'csharp-mode "csharp-mode" "Major mode for editing C# code." t)
+(setq csharp-want-flymake-fixup nil)
+(setq auto-mode-alist
+      (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
+
+
+@
+
+
+1.4
+log
+@checkpoint for Emacs24
+@
+text
+@d1 1
+a1 1
+; $Id: .emacs,v 1.3 2009/05/19 14:21:46 vhaag Exp vhaag $	
+d24 1
+a24 1
+       (expand-file-name "/usr/local/share/emacs/site-lisp/nxhtml")
+d34 1
+a34 1
+                                      ("/usr/local/info" "/usr/share/info"))
+d76 4
+a79 4
+ "-apple-inconsolata-medium-r-normal--14-*-*-*-*-*-fontset-mac,
+ascii:-apple-inconsolata-medium-r-normal--14-*-*-*-*-*-iso10646-1,
+latin-iso8859-1:-apple-inconsolata-medium-r-normal--14-*-*-*-*-*-iso10646-1,
+mule-unicode-0100-24ff:-apple-inconsolata-medium-r-normal--14-*-*-*-*-*-iso10646-1")
+d89 1
+a89 1
+         ("Inconsolata 12" "-apple-inconsolata-medium-r-normal--14-*-*-*-*-*-fontset-mac")
+d103 1
+a103 1
+        (font . "-apple-inconsolata-medium-r-normal--14-*-*-*-*-*-iso10646-1")
+d172 2
+d175 2
+d196 1
+a196 1
+(load "/usr/local/share/emacs/site-lisp/nxhtml/autostart.el")
+d300 7
+d336 4
+a339 4
+          (function
+           (lambda ()
+             "Nuke the default rst-mode abbrev table"
+             (clear-abbrev-table rst-mode-abbrev-table))))
+@
+
+
+1.3
+log
+@added inconsolata to list of font choices, and use it as the
+default font
+@
+text
+@d1 1
+a1 1
+;	$Id: .emacs,v 1.2 2009/05/19 13:52:05 vhaag Exp vhaag $	
+d3 1
+a3 1
+;(garbage-collect)
+d17 1
+a17 1
+       (expand-file-name "/usr/local/share/emacs/color-theme-el")
+d23 2
+a24 1
+       (expand-file-name "/usr/local/share/emacs/site-lisp/pcomplete")
+a28 2
+;       (expand-file-name "/usr/local/share/emacs/site-lisp/w3")
+;       (expand-file-name "/usr/local/share/emacs/site-lisp/xae/lisp")
+d39 1
+a39 1
+;(require mwheel) -- is this needed for E22?
+d42 1
+a42 1
+(load-library "p4")
+d46 64
+a109 63
+;; Version dependent environment handling
+(cond
+ ((>= emacs-major-version 22)
+  ;; set up exec path
+  (setq exec-path 
+       (quote 
+        ("/sw/bin" 
+	 "/sw/sbin"
+         "/usr/local/bin"
+	 "/usr/bin"
+	 "/bin"
+         "/Users/vhaag/bin" 
+         "/Applications/Emacs.app/Contents/MacOS/libexec"
+         "/Applications/Emacs.app/Contents/MacOS/bin"
+         nil))
+       )
+  ;; M-x mac-font-panel-mode to open the Mac font chooser
+  ;; M-x describe font to get help description for (current) font
+  ;; create font sets
+  (create-fontset-from-fontset-spec
+   "-apple-andale mono-medium-r-normal--12-*-*-*-*-*-fontset-mac,
+    ascii:-apple-andale mono-medium-r-normal--12-*-*-*-m-*-mac-roman,
+    latin-iso8859-1:-apple-andale mono-medium-r-normal--12-*-*-*-m-*-mac-roman,
+    mule-unicode-0100-24ff:-apple-andale mono-medium-r-normal--12-*-*-*-m-*-mac-roman")
+  (create-fontset-from-fontset-spec
+   "-apple-inconsolata-medium-r-normal--14-*-*-*-*-*-iso10646-1,
+    ascii:-apple-inconsolata-medium-r-normal--14-*-*-*-*-*-iso10646-1,
+    latin-iso8859-1:-apple-inconsolata-medium-r-normal--14-*-*-*-*-*-iso10646-1,
+    mule-unicode-0100-24ff:-apple-inconsolata-medium-r-normal--14-*-*-*-*-*-iso10646-1")
+  (create-fontset-from-fontset-spec
+   "-apple-lucida grande-*-*-normal--12-*-*-*-*-*-fontset-mac,
+    ascii:-apple-lucida grande-*-*-normal--12-*-*-*-m-*-mac-roman,
+    latin-iso8859-1:-apple-lucida grande-*-*-normal--12-*-*-*-m-*-mac-roman,
+    mule-unicode-0100-24ff:-apple-lucida grande-*-*-normal--12-*-*-*-m-*-mac-roman")
+  (setq x-fixed-font-alist
+        '("Font Menu"
+          ("My Fonts"
+           ("Andale Mono 12" "-apple-andale mono-medium-r-normal--12-*-*-*-*-*-fontset-mac")
+           ("Inconsolata 12" "-apple-inconsolata-medium-r-normal--14-*-*-*-*-*-iso10646-1")
+           ("Lucida Console 12" "-apple-lucida console-*-*-normal--12-*-*-*-*-*-fontset-mac")
+           ("Lucida Grande 12" "-apple-lucida grande-*-*-normal--12-*-*-*-*-*-fontset-mac")
+           )))
+
+  (blink-cursor-mode nil)
+  (setq cursor-in-non-selected-windows nil)
+  (setq scalable-fonts-allowed t)
+  (tool-bar-mode -1)
+  (setq mac-allow-anti-aliasing t)
+
+  (setq default-frame-alist
+        '(
+          (cursor-color . "red")
+; For use with emacs-carbon -- won't work with X11 emacs
+;          (font . "-apple-andale mono-medium-r-normal--12-*-*-*-*-*-fontset-mac")
+          (font . "-apple-inconsolata-medium-r-normal--14-*-*-*-*-*-iso10646-1")
+;          (font . "-apple-lucida console-*-*-normal--12-*-*-*-*-*-fontset-mac")
+;          (font . "-apple-lucida grande-*-*-normal--12-*-*-*-*-*-fontset-mac")
+          (foreground-color . "black")
+          (background-color . "white")
+          (menu-bar-lines . 1)
+          (width . 95)
+          (height . 45)
+          ))
+d112 2
+a113 44
+     (define-key minibuffer-local-filename-completion-map (kbd "SPC")
+       'minibuffer-complete-word)
+
+     (define-key minibuffer-local-must-match-filename-map (kbd "SPC")
+       'minibuffer-complete-word)
+
+
+  ) ;; emacs v22+
+
+ ((= emacs-major-version 21)
+  ;; set up exec path
+  (setq exec-path 
+       (quote 
+        ("/sw/bin" 
+	 "/sw/sbin"
+         "/usr/local/bin"
+	 "/usr/bin"
+	 "/bin"
+         "/Users/vhaag/bin" 
+         "/usr/libexec/emacs/21.2/powerpc-apple-darwin8.0"
+         nil))
+       )
+  (blink-cursor-mode nil)
+  (setq cursor-in-non-selected-windows nil)
+  (setq scalable-fonts-allowed nil)
+  (tool-bar-mode -1)
+
+  (setq default-frame-alist
+        '(
+          (cursor-color . "red")
+          (foreground-color . "black")
+          (background-color . "white")
+          (menu-bar-lines . 1)
+          (width . 95)
+          (height . 60)
+          ))
+
+    ;; scroll wheel hacks for 21.3.50
+    (global-set-key [mouse-4] 'previous-line)
+    (global-set-key [mouse-5] 'next-line)
+
+  ) ;; emacs v21
+ ) ; cond
+
+d115 2
+d122 1
+a122 1
+)
+d139 26
+a164 26
+(load "eshell-auto")
+(load "em-joc")
+(setq eshell-modules-list 
+      (quote 
+       (eshell-alias
+        eshell-banner
+        eshell-basic
+        eshell-cmpl
+        eshell-dirs
+        eshell-glob
+        eshell-hist
+        eshell-joc
+        eshell-ls
+        eshell-pred
+        eshell-prompt
+        eshell-script
+        eshell-smart
+        eshell-term
+        eshell-unix
+        eshell-xtra
+        )))
+(setq eshell-prompt-function 
+       (quote 
+        joc-eshell-prompt
+        ))
+(setq joc-eshell-prompt-newline t)
+d169 2
+a170 5
+
+
+;; p4 settings
+(setq p4-executable "/usr/local/bin/p4")
+(setq p4-use-p4config-exclusively t)
+a183 1
+
+d188 1
+a188 1
+;  (require 'xae)
+d191 2
+a192 1
+(autoload 'xml-mode "psgml" "Major mode to edit XML files")
+d198 1
+a198 1
+)
+d204 85
+a288 85
+
+                      ; search path for ecatalog files
+;;                      (setq sgml-ecat-files
+;;                             (list
+;;                              "ecatalog"
+;;                              "/usr/local/lib/sgml/ecatalog"
+;;                              ))
+
+                    ; search path for catalog files
+                    (setq sgml-catalog-files
+                          (list
+                           "catalog"
+                           "/usr/local/lib/sgml/catalog"
+                           "/usr/local/lib/ents/iso-entities.cat"
+                           ))
+
+                    ; custom DTDs
+                    (setq sgml-custom-dtd
+                          '(
+                            ( "HTML 3.2"
+                              "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 3.2 Final//EN\">")
+                            ( "HTML 4"
+                              "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\">")
+                            ("XHTML 1"
+                             "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"  \"/usr/local/lib/sgml/dtds/xhtml/xhtml1-transitional\">")
+                            ("DITA Composite (Base)"
+                             "<!DOCTYPE TOPIC PUBLIC \"-//OASIS//DTD DITA Composite//EN\" \"/usr/local/lib/sgml/dtds/dita/ditabase.dtd\">")
+                            ("DITA Concept"
+                             "<!DOCTYPE TOPIC PUBLIC \"-//OASIS//DTD DITA Concept//EN\" \"/usr/local/lib/sgml/dtds/dita/concept.dtd\">")
+                            ("DITA Map"
+                             "<!DOCTYPE TOPIC PUBLIC \"-//OASIS//DTD DITA Map//EN\" \"/usr/local/lib/sgml/dtds/dita/map.dtd\">")
+                            ("DITA Reference"
+                             "<!DOCTYPE TOPIC PUBLIC \"-//OASIS//DTD DITA Reference//EN\" \"/usr/local/lib/sgml/dtds/dita/reference.dtd\">")
+                            ("DITA Task"
+                             "<!DOCTYPE TOPIC PUBLIC \"-//OASIS//DTD DITA Task//EN\" \"/usr/local/lib/sgml/dtds/dita/task.dtd\">")
+                            ("DITA Topic"
+                             "<!DOCTYPE TOPIC PUBLIC \"-//OASIS//DTD DITA Topic//EN\" \"/usr/local/lib/sgml/dtds/dita/topic.dtd\">")
+                            ))
+
+                    ; declarations
+                    (setq sgml-declaration "/usr/local/lib/sgml/dcls/sgml.dcl")
+                    (setq sgml-xml-declaration "/usr/local/lib/sgml/dcls/xml.dcl")
+
+                    ; validation
+                    (setq sgml-validate-command "onsgmls -s %s %s")
+                    (setq sgml-xml-validate-command "onsgmls -wxml -s %s %s")
+
+                    ; global preference overrides
+                    (set-fill-column 80)
+
+                    ; SGML mode preference defaults
+                    (setq sgml-offer-save t)
+             
+                    (setq sgml-omittag t)
+                    (setq sgml-shorttag t)
+                    (setq sgml-always-quote-attributes t)
+                    (setq sgml-minimize-attributes nil)
+             
+                    (setq sgml-balanced-tag-edit t)
+                    (setq sgml-auto-insert-required-elements t)
+                    (setq sgml-ommittag-transparent t)
+                    (setq sgml-tag-region-if-active t)
+                    (setq sgml-insert-missing-element-comment t)
+                    (setq sgml-insert-end-tag-on-new-line t)
+             
+                    (setq sgml-indent-step 1)
+                    (setq sgml-indent-data t)
+             
+                    (setq sgml-normalize-trims t)
+
+                    ; highlighting markup -- note that the faces are defined in color-theme-viktor.el
+                    (setq sgml-set-face t)
+                    (setq sgml-markup-faces
+                          '((comment . sgml-comment-face)
+                            (doctype . sgml-doctype-face)
+                            (end-tag . sgml-end-tag-face)
+                            (entity . sgml-entity-face)
+                            (ignored . sgml-ignored-face)
+                            (ms-end . sgml-ms-end-face)
+                            (ms-start . sgml-ms-start-face)
+                            (pi . sgml-pi-face)
+                            (sgml . sgml-sgml-face)
+                            (short-ref . sgml-short-ref-face)
+                            (start-tag . sgml-start-tag-face)))
+                    )) ; lambda function
+d321 11
+d341 1
+a341 1
+; note that mode source file makes file assoc to *.dot files
+d358 2
+a359 2
+(require 'tramp)
+(setq tramp-default-method "scp")
+d382 2
+a383 2
+(setq user-mail-address "vhaag@@rim.com")
+(setq smtpmail-default-smtp-server "smtp.rim.net")
+a384 1
+;(setq smtpmail-local-domain "rim.com")
+a393 3
+(setq eudc-server "mdc22ykf.rim.net")
+(setq ldap-host-parameters-alist (quote (("mdc22kyf.rim.net" base "dc=rim,dc=net"))))
+(setq ldap-ldapsearch-args (quote ("-H" "ldap://mdc22ykf.rim.net")))
+d398 1
+a398 1
+;(bbdb-initialize 'gnus 'message 'sendmail 'w3)
+d418 1
+d429 1
+a429 2
+;; VM config (use when upgrading to Emacs 20.4, I guess)
+                                     ; rest you can find in ~/.vm
+a438 7
+;; random signature stuff -- removed thanks to RIM's draconian new email policy.
+;; (setq mail-signature nil)
+;; (setq message-signature 'random-signature-fun)
+;;(add-hook 'mail-setup-hook
+;;          (defun my-mail-setup-hook ()
+;;            (message-insert-signature)
+;;            (mail-to)))
+a446 39
+
+;; GNUS config
+(load "gnus-setup")
+(setq gnus-select-method 
+      '(nntp "news.rim.net")
+      )
+(setq gnus-large-newsgroup 1000)
+(setq gnus-nntp-server nil)
+(setq gnus-read-active-file t)
+(setq gnus-use-vm t)
+
+
+                                        ; mailcrypt with GNUS
+(add-hook 'gnus-summary-mode-hook 'mc-install-read-mode)
+(add-hook 'message-mode-hook 'mc-install-write-mode)
+(add-hook 'news-reply-mode-hook 'mc-install-write-mode)
+
+                                        ;(bbdb-insinuate-gnus)
+(autoload 'bbdb/gnus-lines-and-from "bbdb-gnus")
+(setq gnus-optional-headers 'bbdb/gnus-lines-and-from)
+(setq bbdb/gnus-mark-known-posters t)
+(setq smiley-regexp-alist nil)
+
+                                        ; x-face with GNUS
+(add-hook 'message-send-hook 'mail-insert-x-face)
+(setq-default gnus-article-compface-xbm t)
+(setq-default gnus-treat-display-x-face (quote head))
+
+
+;; w3 config
+;; (autoload 'w3 "w3" "WWW Browser" t)
+;; (setq w3-default-homepage "http://suldrun/~vhaag/index.html")
+;; (setq w3-default-stylesheet "~/.w3/default.css")
+;; (setq w3-do-incremental-display nil)
+;; (setq w3-hotlist-file "/Users/vhaag/.w3/bookmarks")
+;; (setq w3-reuse-buffers (quote yes))
+;; (setq w3-use-terminal-characters nil)
+;; (setq w3-use-terminal-glyphs nil)
+
+d472 1
+a472 2
+(setq url-news-server "news.rim.net")
+(setq url-personal-mail-address "vhaag@@rim.com")
+a475 1
+
+d479 1
+a479 1
+(setq ps-printer-name "hp9040")
+d543 1
+a543 1
+(setq-default fill-column 65)
+d555 2
+a556 2
+  ; Maximum size of menu to fontify if `Info-fontify' is non-nil.
+     ; Increased from default of 30000 for elisp manual main menu
+d559 1
+a559 1
+                              ; Lambda func to query a kill emacs
+d569 1
+d590 1
+a590 1
+(global-set-key "\M-%" 'query-replace-regexp)
+d599 4
+a602 4
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+d606 7
+a612 4
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+d614 4
+a617 1
+ '(jde-jdk-registry (quote (("1.5.0" . "/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0")))))
+@
+
+
+1.2
+log
+@checkpoint
+@
+text
+@d1 1
+a1 1
+;	$Id: .emacs,v 1.21 2006/02/27 20:43:18 vhaag Exp vhaag $	
+d63 2
+d72 4
+a75 6
+                                        ;-apple-inconsolata-medium-r-normal--0-0-0-0-m-0-mac-centraleurroman
+                                        ;-apple-inconsolata-medium-r-normal--0-0-0-0-m-0-iso10646-1
+   "-apple-inconsolata-medium-r-normal--12-*-*-*-*-*-mac-centraleurroman,
+    ascii:-apple-inconsolata-medium-r-normal--12-*-*-*-m-*-mac-centraleurroman,
+    latin-iso8859-1:-apple-inconsolata-medium-r-normal--12-*-*-*-m-*-mac-centraleurroman,
+    mule-unicode-0100-24ff:-apple-inconsolata-medium-r-normal--12-*-*-*-m-*-mac-centraleurroman")
+d85 1
+a85 1
+           ("Inconsolata 12" "-apple-inconsolata-medium-r-normal--12-*-*-*-*-*-mac-centraleurroman,")
+d101 1
+d103 1
+a103 1
+          (font . "-apple-lucida grande-*-*-normal--12-*-*-*-*-*-fontset-mac")
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 3
+a3 1
+;	$Id: .emacs,v 1.16 2004/06/24 15:40:12 vhaag Exp $	
+d8 2
+a9 9
+; This should eventually work to move META back to the option key
+; (setq mac-command-key-is-meta nil)
+
+;;; set language environment
+;(let ((default-enable-multibyte-characters nil))
+;  (set-language-environment "Latin-1")
+;  (set-frame-font "fontset-mac")
+;)
+
+d17 1
+d21 1
+d28 2
+a29 1
+       (expand-file-name "/usr/local/share/emacs/site-lisp/w3")
+d33 13
+d47 5
+a51 2
+;;; set up exec path
+ (setq exec-path 
+d59 2
+a60 3
+         "/sw/lib/emacs/21.3.50/powerpc-apple-darwin7.4.0/"
+;         "/Applications/Emacs.app/Contents/MacOS/libexec"
+;         "/Applications/Emacs.app/Contents/MacOS/bin"
+d63 32
+d96 20
+a115 4
+;;; set up info path
+(setq Info-additional-directory-list (quote
+                                      ("/usr/local/info" "/usr/share/info"))
+      )
+d118 1
+a118 8
+;; do loads of other packages
+(require 'cl)
+(require 'mwheel)
+(load-library "p4")
+(load "localfun")
+; don't load random-sig unless you want random sigs
+; (load "random-sig")
+(load (expand-file-name "~/.env/ange-ftp.el"))
+d120 13
+a132 3
+;; do handling of Emacs 21 environment
+(cond
+ ((>= emacs-major-version 21)
+d136 2
+a137 1
+  (tool-bar-mode nil)
+a140 5
+; For use with emacs-carbon
+;          (font . "-apple-lucida sans typewriter-*-r-*--0-0-75-75-m-0-mac-roman")
+; For use with emacs21
+;          (font . "-b&h-lucidatypewriter-medium-*-normal-sans-10-0-75-75-m-0-iso8859-1")
+;          (font . "-b&h-luxi mono-medium-r-*-*-*-*-*-*-*-*-*-*")
+d144 1
+a144 1
+          (width . 90)
+d147 6
+a152 5
+  (eval-after-load "image"
+    '(setq image-type-regexps
+           (cons (cons "^\377\330" 'jpeg) image-type-regexps))
+    )
+  )
+d156 1
+d166 1
+d171 1
+a171 1
+               "Viktor Haag <viktor@@haags.org>"))
+d205 2
+d211 1
+a211 1
+(setq p4-executable "/usr/src/swdocs/rsrc/bin/p4")
+a217 3
+;;; Emacs-lisp-mode additional file associations
+(add-to-modelist "\\.vm$" 'emacs-lisp-mode)
+
+a224 7
+;;; JDE and Doxymacs mode configuration
+(add-hook 'jde-mode-hook 
+          (function
+           (lambda ()
+             "Fix auto-filling"
+             (turn-on-auto-fill)
+             (set-fill-column 80))))
+a225 5
+;;;
+;;; RIM modes configuration
+(autoload 'rid-mode "rid-mode" "Major mode to edit RID files" t)
+(add-to-modelist "\\.rid$" 'rid-mode)
+(add-to-modelist "\\.rap$" 'java-mode)
+d227 5
+a231 9
+;;;
+;;; SGML configuration
+;;;
+(autoload 'sgml-mode "psgml" "Major mode to edit SGML files" t)
+(autoload 'xml-mode  "psgml" "Major mode to edit XML files"  t)
+(add-to-modelist "\\.html?$" 'sgml-html-mode)
+(add-to-modelist "\\.shtml?$" 'sgml-html-mode)
+(add-to-modelist "\\.s?gml$" 'sgml-mode)
+(add-to-modelist "\\.xml$" 'sgml-mode)
+d233 2
+a234 62
+(add-hook 'sgml-mode-hook
+          (function
+           (lambda ()
+             "Extra mode hooks for sgml mode"
+             (setq sgml-ecat-files
+                   (list
+                    "ecatalog"
+                    "/usr/local/lib/sgml/ecatalog"
+                    ))
+                    ; set this value to t to provide lookup trace
+                              ; (setq sgml-trace-entity-lookup t)
+             (setq sgml-catalog-files
+                   (list
+                    "catalog"
+                    "CATALOG"
+                    "/usr/local/lib/sgml/catalog"
+                    "/usr/local/lib/sgml/ents/iso-entities.cat"
+                    "/usr/local/lib/sgml-tools/dtd/catalog"
+                    ))
+             (setq sgml-custom-dtd
+                   '(
+                     ( "HTML 3.2"
+                       "<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML 3.2//EN\">")
+                     ( "HTML 4"
+                       "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\">")
+                     ( "XHTML 1"
+                       "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\">")
+                     ))
+             
+             (setq sgml-offer-save t)
+             
+             (setq sgml-omittag t)
+             (setq sgml-shorttag t)
+             (setq sgml-always-quote-attributes t)
+             (setq sgml-minimize-attributes nil)
+             
+             (setq sgml-balanced-tag-edit t)
+             (setq sgml-auto-insert-required-elements t)
+             (setq sgml-ommittag-transparent t)
+             (setq sgml-tag-region-if-active t)
+             (setq sgml-insert-missing-element-comment t)
+             (setq sgml-insert-end-tag-on-new-line t)
+             
+             (setq sgml-indent-step 1)
+             (setq sgml-indent-data t)
+             
+             (setq sgml-normalize-trims t)
+             
+             (setq sgml-set-face t)
+             (setq sgml-markup-faces
+                   '((comment . sgml-comment-face)
+                     (doctype . sgml-doctype-face)
+                     (end-tag . sgml-end-tag-face)
+                     (entity . sgml-entity-face)
+                     (ignored . sgml-ignored-face)
+                     (ms-end . sgml-ms-end-face)
+                     (ms-start . sgml-ms-start-face)
+                     (pi . sgml-pi-face)
+                     (sgml . sgml-sgml-face)
+                     (short-ref . sgml-short-ref-face)
+                     (start-tag . sgml-start-tag-face)))
+             (set-fill-column 80))))
+d236 2
+a237 5
+;;;
+;;; SGML-HTML Mode
+;;;
+(defun sgml-html-mode ()
+  "This version of html mode is just a wrapper around sgml mode."
+d240 1
+a240 5
+  (make-local-variable 'sgml-declaration)
+  (make-local-variable 'sgml-default-doctype-name)
+  (setq
+   sgml-default-doctype-name          "html"
+   sgml-declaration                   "/usr/local/lib/sgml/dcls//html.dcl"))
+d242 50
+d293 2
+d296 36
+a331 5
+;;;
+;;; XML Mode configuration : used with psgml/sgml mode
+;;;
+(setq sgml-xml-declaration 
+      (expand-file-name "/usr/local/lib/sgml/dcls//xml.dcl"))
+a333 17
+;;;
+;;; DTD Mode configuration : used with psgml/sgml mode
+;;;
+(autoload 'dtd-mode "tdtd" "Major mode for SGML and XML DTDs." t)
+(autoload 'dtd-etags "tdtd"
+  "Execute etags on FILESPEC and match on DTD-specific regular expressions." t)
+(autoload 'dtd-grep "tdtd" "Grep for PATTERN in files matching FILESPEC." t)
+(setq auto-mode-alist
+      (append
+       (list
+        '("\\.dcl$" . dtd-mode)
+        '("\\.dec$" . dtd-mode)
+        '("\\.dtd$" . dtd-mode)
+        '("\\.ele$" . dtd-mode)
+        '("\\.ent$" . dtd-mode)
+        '("\\.mod$" . dtd-mode))
+       auto-mode-alist))
+d335 2
+d355 1
+a355 1
+;;; Sawmill/Sawfish configuration
+d357 30
+a386 3
+(autoload 'sawfish-mode "sawfish" "sawfish-mode" t)
+(add-to-modelist "\\.sawfishrc$" 'sawfish-mode)
+(add-to-modelist "\\.jl$" 'sawfish-mode)
+d409 2
+a414 1
+; (setq smtpmail-default-smtp-server "xch09ykf.rim.net")
+d416 1
+a416 1
+(setq smtpmail-local-domain "rim.com")
+d426 3
+a428 3
+(setq eudc-server "mail.rim.net")
+(setq ldap-host-parameters-alist (quote (("mail.rim.net" base "cn=recipients,ou=RIM_Mail,o=Research In Motion"))))
+(setq ldap-ldapsearch-args (quote ("-H" "ldap://mail.rim.net")))
+d433 2
+a434 1
+(bbdb-initialize 'gnus 'message 'sendmail 'w3)
+d515 1
+a515 1
+(setq-default gnus-treat-display-xface (quote head))
+d519 8
+a526 8
+(autoload 'w3 "w3" "WWW Browser" t)
+(setq w3-default-homepage "http://suldrun/~vhaag/index.html")
+(setq w3-default-stylesheet "~/.w3/default.css")
+(setq w3-do-incremental-display nil)
+(setq w3-hotlist-file "/Users/vhaag/.w3/bookmarks")
+(setq w3-reuse-buffers (quote yes))
+(setq w3-use-terminal-characters nil)
+(setq w3-use-terminal-glyphs nil)
+d562 1
+a562 1
+(setq ps-printer-name "hp8100_ip")
+a630 1
+(scroll-bar-mode nil)
+d635 1
+d674 3
+a676 3
+;; scroll wheel hacks for 21.3.50
+(global-set-key [mouse-4] 'previous-line)
+(global-set-key [mouse-5] 'next-line)
+d686 1
+d692 2
+a693 1
+)
+@

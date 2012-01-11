@@ -1,0 +1,407 @@
+;;-*-coding: utf-8;-*-
+(define-abbrev-table 'Buffer-menu-mode-abbrev-table '())
+
+(define-abbrev-table 'Custom-mode-abbrev-table '())
+
+(define-abbrev-table 'applescript-mode-abbrev-table '())
+
+(define-abbrev-table 'apropos-mode-abbrev-table '())
+
+(define-abbrev-table 'awk-mode-abbrev-table
+  '(
+   ))
+
+(define-abbrev-table 'bookmark-bmenu-mode-abbrev-table '())
+
+(define-abbrev-table 'bsh-script-mode-abbrev-table '())
+
+(define-abbrev-table 'c++-mode-abbrev-table
+  '(
+   ))
+
+(define-abbrev-table 'c-mode-abbrev-table
+  '(
+   ))
+
+(define-abbrev-table 'calendar-mode-abbrev-table '())
+
+(define-abbrev-table 'change-log-mode-abbrev-table '())
+
+(define-abbrev-table 'clojure-mode-abbrev-table '())
+
+(define-abbrev-table 'comint-mode-abbrev-table '())
+
+(define-abbrev-table 'completion-list-mode-abbrev-table '())
+
+(define-abbrev-table 'csharp-mode-abbrev-table
+  '(
+   ))
+
+(define-abbrev-table 'custom-new-theme-mode-abbrev-table '())
+
+(define-abbrev-table 'custom-theme-choose-mode-abbrev-table '())
+
+(define-abbrev-table 'cython-mode-abbrev-table '())
+
+(define-abbrev-table 'diff-mode-abbrev-table '())
+
+(define-abbrev-table 'display-time-world-mode-abbrev-table '())
+
+(define-abbrev-table 'dtd-mode-abbrev-table
+  '(
+    ("xcmt" "<em><font color=red>" nil 0)
+    ("xdoc" "<!DOCTYPE HTML PUBLIC \"-//MKS//DTD HTML MKS//EN\">" nil 0)
+    ("xmksbi" "<em>MKS Build Integrity</em>" nil 0)
+    ("xmksci" "<em>MKS Content Integrity</em>" nil 0)
+    ("xmkscpr" "Copyright &#169 1996 Mortice Kern Systems Inc." nil 0)
+    ("xmksie" "<em>MKS Integrity Engine</em>" nil 0)
+    ("xmkssi" "<em>MKS Source Integrity</em>" nil 0)
+    ("xmkstk" "<em>MKS Toolkit</em>" nil 0)
+    ("xmkswi" "<em>MKS Web Integrity</em>" nil 0)
+    ("xpatrol" "<strong>Space Patrol!</strong>" nil 0)
+    ("xsp" "&nbsp;" nil 0)
+    ("xwi" "<em>Web Integrity</em>" nil 0)
+   ))
+
+(define-abbrev-table 'emacs-lisp-mode-abbrev-table '())
+
+(define-abbrev-table 'eshell-mode-abbrev-table '())
+
+(define-abbrev-table 'fundamental-mode-abbrev-table '())
+
+(define-abbrev-table 'global-abbrev-table
+  '(
+    ("attrbiute" "attribute" nil 10)
+    ("enumberate" "enumerate" nil 3)
+    ("flase" "false" nil 2)
+    ("numberic" "numeric" nil 5)
+    ("teh" "the" nil 416)
+   ))
+
+(define-abbrev-table 'gnus-article-edit-mode-abbrev-table '())
+
+(define-abbrev-table 'graphviz-dot-mode-abbrev-table '())
+
+(define-abbrev-table 'grep-mode-abbrev-table '())
+
+(define-abbrev-table 'gud-mode-abbrev-table '())
+
+(define-abbrev-table 'help-mode-abbrev-table '())
+
+(define-abbrev-table 'html-helper-mode-abbrev-table '())
+
+(define-abbrev-table 'html-mode-abbrev-table '())
+
+(define-abbrev-table 'idl-mode-abbrev-table '())
+
+(define-abbrev-table 'inferior-moz-mode-abbrev-table '())
+
+(define-abbrev-table 'inferior-python-mode-abbrev-table '())
+
+(define-abbrev-table 'internal-ange-ftp-mode-abbrev-table '())
+
+(define-abbrev-table 'java-mode-abbrev-table
+  '(
+   ))
+
+(define-abbrev-table 'jde-mode-abbrev-table
+  '(
+    ("catch" "catch" c-electric-continued-statement 0)
+    ("else" "else" c-electric-continued-statement 0)
+    ("finally" "finally" c-electric-continued-statement 0)
+    ("while" "while" c-electric-continued-statement 0)
+   ))
+
+(define-abbrev-table 'jde-run-mode-abbrev-table '())
+
+(define-abbrev-table 'js-mode-abbrev-table '())
+
+(define-abbrev-table 'jython-mode-abbrev-table '())
+
+(define-abbrev-table 'lisp-interaction-mode-abbrev-table '())
+
+(define-abbrev-table 'lisp-mode-abbrev-table '())
+
+(define-abbrev-table 'log-edit-mode-abbrev-table '())
+
+(define-abbrev-table 'log-view-mode-abbrev-table '())
+
+(define-abbrev-table 'mail-abbrevs '())
+
+(define-abbrev-table 'makefile-automake-mode-abbrev-table '())
+
+(define-abbrev-table 'makefile-bsdmake-mode-abbrev-table '())
+
+(define-abbrev-table 'makefile-gmake-mode-abbrev-table '())
+
+(define-abbrev-table 'makefile-imake-mode-abbrev-table '())
+
+(define-abbrev-table 'makefile-makepp-mode-abbrev-table '())
+
+(define-abbrev-table 'makefile-mode-abbrev-table '())
+
+(define-abbrev-table 'message-mode-abbrev-table '())
+
+(define-abbrev-table 'mumamo-comment-mode-abbrev-table '())
+
+(define-abbrev-table 'muse-mode-abbrev-table '())
+
+(define-abbrev-table 'noshell-process-mode-abbrev-table '())
+
+(define-abbrev-table 'nroff-mode-abbrev-table '())
+
+(define-abbrev-table 'nxhtml-genshi-mode-abbrev-table '())
+
+(define-abbrev-table 'nxhtml-mjt-mode-abbrev-table '())
+
+(define-abbrev-table 'nxhtml-mode-abbrev-table '())
+
+(define-abbrev-table 'nxml-mode-abbrev-table '())
+
+(define-abbrev-table 'objc-mode-abbrev-table
+  '(
+   ))
+
+(define-abbrev-table 'occur-edit-mode-abbrev-table '())
+
+(define-abbrev-table 'occur-mode-abbrev-table '())
+
+(define-abbrev-table 'org-mode-abbrev-table '())
+
+(define-abbrev-table 'outline-mode-abbrev-table '())
+
+(define-abbrev-table 'package-menu-mode-abbrev-table '())
+
+(define-abbrev-table 'perl-mode-abbrev-table '())
+
+(define-abbrev-table 'pike-mode-abbrev-table
+  '(
+   ))
+
+(define-abbrev-table 'proced-mode-abbrev-table '())
+
+(define-abbrev-table 'process-menu-mode-abbrev-table '())
+
+(define-abbrev-table 'prog-mode-abbrev-table '())
+
+(define-abbrev-table 'py-mode-abbrev-table '())
+
+(define-abbrev-table 'python-mode-abbrev-table '())
+
+(define-abbrev-table 'python2-mode-abbrev-table '())
+
+(define-abbrev-table 'python3-mode-abbrev-table '())
+
+(define-abbrev-table 'rst-mode-abbrev-table
+  '(
+    ("con" "con" nil 0)
+    ("cont" "cont" nil 0)
+    ("contents" "contents" nil 4)
+    ("seq" "seq" nil 0)
+    ("skip" "skip" nil 0)
+   ))
+
+(define-abbrev-table 'rst-toc-mode-abbrev-table '())
+
+(define-abbrev-table 'sgml-mode-abbrev-table
+  '(
+    ("xcmt" "<em><font color=red>" nil 3)
+    ("xdoc" "<!DOCTYPE HTML PUBLIC \"-//MKS//DTD HTML MKS//EN\">" nil 7)
+    ("xmksbi" "<em>MKS Build Integrity</em>" nil 1)
+    ("xmksci" "<em>MKS Content Integrity</em>" nil 0)
+    ("xmkscpr" "Copyright &#169 1996 Mortice Kern Systems Inc." nil 0)
+    ("xmksie" "<em>MKS Integrity Engine</em>" nil 0)
+    ("xmkssi" "<em>MKS Source Integrity</em>" nil 0)
+    ("xmkstk" "<em>MKS Toolkit</em>" nil 0)
+    ("xmkswi" "<em>MKS Web Integrity</em>" nil 15)
+    ("xpatrol" "<strong>Space Patrol!</strong>" nil 0)
+    ("xsp" "&nbsp;" nil 1)
+    ("xwi" "<em>Web Integrity</em>" nil 37)
+   ))
+
+(define-abbrev-table 'sh-mode-abbrev-table '())
+
+(define-abbrev-table 'shell-mode-abbrev-table '())
+
+(define-abbrev-table 'snippet-mode-abbrev-table '())
+
+(define-abbrev-table 'snmp-mode-abbrev-table '())
+
+(define-abbrev-table 'snmpv2-mode-abbrev-table '())
+
+(define-abbrev-table 'special-mode-abbrev-table '())
+
+(define-abbrev-table 'speedbar-mode-abbrev-table '())
+
+(define-abbrev-table 'sql-mode-abbrev-table
+  '(
+    ("del" "delete" nil 0)
+    ("ins" "insert" nil 0)
+    ("sel" "select" nil 0)
+    ("upd" "update" nil 0)
+   ))
+
+(define-abbrev-table 'svn-log-edit-mode-abbrev-table '())
+
+(define-abbrev-table 'svn-log-view-mode-abbrev-table '())
+
+(define-abbrev-table 'svn-status-diff-mode-abbrev-table '())
+
+(define-abbrev-table 'tabulated-list-mode-abbrev-table '())
+
+(define-abbrev-table 'texinfo-mode-abbrev-table '())
+
+(define-abbrev-table 'text-mode-abbrev-table '())
+
+(define-abbrev-table 'udev-control-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-annotate-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-dired-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-git-log-view-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-log-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-svn-log-view-mode-abbrev-table '())
+
+(define-abbrev-table 'vhdl-mode-abbrev-table
+  '(
+    ("--" "" vhdl-display-comment-hook 0)
+    ("abs" "" vhdl-default-hook 0)
+    ("access" "" vhdl-default-hook 0)
+    ("after" "" vhdl-default-hook 0)
+    ("alias" "" vhdl-alias-hook 0)
+    ("all" "" vhdl-default-hook 0)
+    ("and" "" vhdl-default-hook 0)
+    ("arch" "" vhdl-architecture-hook 0)
+    ("architecture" "" vhdl-architecture-hook 0)
+    ("array" "" vhdl-array-hook 0)
+    ("assert" "" vhdl-assert-hook 0)
+    ("attr" "" vhdl-attribute-hook 0)
+    ("attribute" "" vhdl-attribute-hook 0)
+    ("begin" "" vhdl-default-indent-hook 0)
+    ("block" "" vhdl-block-hook 0)
+    ("body" "" vhdl-default-hook 0)
+    ("buffer" "" vhdl-default-hook 0)
+    ("bus" "" vhdl-default-hook 0)
+    ("case" "" vhdl-case-hook 0)
+    ("comp" "" vhdl-component-hook 0)
+    ("component" "" vhdl-component-hook 0)
+    ("conc" "" vhdl-concurrent-signal-assignment-hook 0)
+    ("concurrent" "" vhdl-concurrent-signal-assignment-hook 0)
+    ("conf" "" vhdl-configuration-hook 0)
+    ("configuration" "" vhdl-configuration-hook 0)
+    ("cons" "" vhdl-constant-hook 0)
+    ("constant" "" vhdl-constant-hook 0)
+    ("disconnect" "" vhdl-disconnect-hook 0)
+    ("downto" "" vhdl-default-hook 0)
+    ("else" "" vhdl-else-hook 0)
+    ("elseif" "" vhdl-elsif-hook 0)
+    ("elsif" "" vhdl-elsif-hook 0)
+    ("end" "" vhdl-default-indent-hook 0)
+    ("entity" "" vhdl-entity-hook 0)
+    ("exit" "" vhdl-exit-hook 0)
+    ("file" "" vhdl-default-hook 0)
+    ("for" "" vhdl-for-hook 0)
+    ("func" "" vhdl-function-hook 0)
+    ("function" "" vhdl-function-hook 0)
+    ("gen" "" vhdl-generate-hook 0)
+    ("generate" "" vhdl-generate-hook 0)
+    ("generic" "" vhdl-generic-hook 0)
+    ("group" "" vhdl-default-hook 0)
+    ("guarded" "" vhdl-default-hook 0)
+    ("header" "" vhdl-header-hook 0)
+    ("if" "" vhdl-if-hook 0)
+    ("impure" "" vhdl-default-hook 0)
+    ("in" "" vhdl-default-hook 0)
+    ("inertial" "" vhdl-default-hook 0)
+    ("inout" "" vhdl-default-hook 0)
+    ("inst" "" vhdl-component-instance-hook 0)
+    ("instance" "" vhdl-component-instance-hook 0)
+    ("is" "" vhdl-default-hook 0)
+    ("label" "" vhdl-default-hook 0)
+    ("library" "" vhdl-library-hook 0)
+    ("linkage" "" vhdl-default-hook 0)
+    ("literal" "" vhdl-default-hook 0)
+    ("loop" "" vhdl-loop-hook 0)
+    ("map" "" vhdl-map-hook 0)
+    ("mod" "" vhdl-default-hook 0)
+    ("modify" "" vhdl-modify-hook 0)
+    ("nand" "" vhdl-default-hook 0)
+    ("new" "" vhdl-default-hook 0)
+    ("next" "" vhdl-next-hook 0)
+    ("nor" "" vhdl-default-hook 0)
+    ("not" "" vhdl-default-hook 0)
+    ("null" "" vhdl-default-hook 0)
+    ("of" "" vhdl-default-hook 0)
+    ("on" "" vhdl-default-hook 0)
+    ("open" "" vhdl-default-hook 0)
+    ("or" "" vhdl-default-hook 0)
+    ("others" "" vhdl-default-hook 0)
+    ("out" "" vhdl-default-hook 0)
+    ("pack" "" vhdl-package-hook 0)
+    ("package" "" vhdl-package-hook 0)
+    ("port" "" vhdl-port-hook 0)
+    ("postponed" "" vhdl-default-hook 0)
+    ("procedure" "" vhdl-procedure-hook 0)
+    ("process" "" vhdl-process-hook 0)
+    ("pure" "" vhdl-default-hook 0)
+    ("range" "" vhdl-default-hook 0)
+    ("record" "" vhdl-record-hook 0)
+    ("register" "" vhdl-default-hook 0)
+    ("reject" "" vhdl-default-hook 0)
+    ("rem" "" vhdl-default-hook 0)
+    ("report" "" vhdl-default-hook 0)
+    ("ret" "" vhdl-return-hook 0)
+    ("return" "" vhdl-return-hook 0)
+    ("rol" "" vhdl-default-hook 0)
+    ("ror" "" vhdl-default-hook 0)
+    ("select" "" vhdl-selected-signal-assignment-hook 0)
+    ("severity" "" vhdl-default-hook 0)
+    ("shared" "" vhdl-default-hook 0)
+    ("sig" "" vhdl-signal-hook 0)
+    ("signal" "" vhdl-signal-hook 0)
+    ("sla" "" vhdl-default-hook 0)
+    ("sll" "" vhdl-default-hook 0)
+    ("sra" "" vhdl-default-hook 0)
+    ("srl" "" vhdl-default-hook 0)
+    ("sub" "" vhdl-subtype-hook 0)
+    ("subtype" "" vhdl-subtype-hook 0)
+    ("then" "" vhdl-default-hook 0)
+    ("to" "" vhdl-default-hook 0)
+    ("transport" "" vhdl-default-hook 0)
+    ("type" "" vhdl-type-hook 0)
+    ("unaffected" "" vhdl-default-hook 0)
+    ("units" "" vhdl-default-hook 0)
+    ("until" "" vhdl-default-hook 0)
+    ("use" "" vhdl-use-hook 0)
+    ("var" "" vhdl-variable-hook 0)
+    ("variable" "" vhdl-variable-hook 0)
+    ("wait" "" vhdl-wait-hook 0)
+    ("warning" "" vhdl-default-hook 0)
+    ("when" "" vhdl-when-hook 0)
+    ("while" "" vhdl-while-loop-hook 0)
+    ("with" "" vhdl-selected-signal-assignment-hook 0)
+    ("xnor" "" vhdl-default-hook 0)
+    ("xor" "" vhdl-default-hook 0)
+   ))
+
+(define-abbrev-table 'wab-compilation-mode-abbrev-table '())
+
+(define-abbrev-table 'xml-mode-abbrev-table
+  '(
+    ("xcmt" "<em><font color=red>" nil 0)
+    ("xdoc" "<!DOCTYPE HTML PUBLIC \"-//MKS//DTD HTML MKS//EN\">" nil 0)
+    ("xmksbi" "<em>MKS Build Integrity</em>" nil 0)
+    ("xmksci" "<em>MKS Content Integrity</em>" nil 0)
+    ("xmkscpr" "Copyright &#169 1996 Mortice Kern Systems Inc." nil 0)
+    ("xmksie" "<em>MKS Integrity Engine</em>" nil 0)
+    ("xmkssi" "<em>MKS Source Integrity</em>" nil 0)
+    ("xmkstk" "<em>MKS Toolkit</em>" nil 0)
+    ("xmkswi" "<em>MKS Web Integrity</em>" nil 0)
+    ("xpatrol" "<strong>Space Patrol!</strong>" nil 0)
+    ("xsp" "&nbsp;" nil 0)
+    ("xwi" "<em>Web Integrity</em>" nil 0)
+   ))
+
