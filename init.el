@@ -9,6 +9,16 @@
 (setq starter-kit-dir
       (file-name-directory (or load-file-name (buffer-file-name))))
 
+;; Use local org mode instead of the one that ships with Emacs binary, as an
+;; attempted workaround for post 24.2 pretest builds botching
+(require 'cl)
+(setq load-path (remove-if (lambda (x) (string-match-p "org$" x)) load-path))
+
+(add-to-list 'load-path (car (file-expand-wildcards
+                              (concat starter-kit-dir
+                                      "elpa/org-*"))))
+(require 'org)
+
 ;; load up the starter kit
 (org-babel-load-file (expand-file-name "starter-kit.org" starter-kit-dir))
 
