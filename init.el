@@ -5,21 +5,26 @@
 ;; This is the first thing to get loaded.
 ;;
 
-;; remember this directory
-(setq starter-kit-dir
-      (file-name-directory (or load-file-name (buffer-file-name))))
+;; load the sarter kit from the `after-init-hook' so all packages are loaded
+(add-hook `after-init-hook
+          `(lambda ()
+             ;; remember this directory
+             (setq starter-kit-dir
+                   (file-name-directory (or load-file-name (buffer-file-name))))
 
-;; Use local org mode instead of the one that ships with Emacs binary, as an
-;; attempted workaround for post 24.2 pretest builds botching
-(require 'cl)
-(setq load-path (remove-if (lambda (x) (string-match-p "org$" x)) load-path))
+             ;; Use local org mode instead of the one that ships with Emacs binary, as an
+             ;; attempted workaround for post 24.2 pretest builds botching
+             (require 'cl)
+             (setq load-path (remove-if (lambda (x) (string-match-p "org$" x)) load-path))
 
-(add-to-list 'load-path (car (file-expand-wildcards
-                              (concat starter-kit-dir
-                                      "elpa/org-*"))))
-(require 'org)
+             (add-to-list 'load-path (car (file-expand-wildcards
+                                           (concat starter-kit-dir
+                                                   "elpa/org-*"))))
+             (require 'org)
+             
+             ;; load up the starter kit
+             (org-babel-load-file (expand-file-name "starter-kit.org" starter-kit-dir))
 
-;; load up the starter kit
-(org-babel-load-file (expand-file-name "starter-kit.org" starter-kit-dir))
+             ))
 
 ;;; init.el ends here
