@@ -13,5 +13,5 @@ Support for the Go programming language.
    :END:
 The go-mode package loads go-mode using a loader file, so we require that here.
 #+begin_src emacs-lisp
-(require 'go-mode-load)
+(require 'go-mode-autoloads)
 #+end_src
