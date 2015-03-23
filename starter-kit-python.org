@@ -22,6 +22,8 @@ install them.
 Replace the Python mode that comes with Emacs by the Python mode
 supplied by the Python distribution itself.
 #+begin_src emacs-lisp
+(setq py-install-directory
+      (car (directory-files package-user-dir t "python-mode-.*")) )
 (require 'python-mode)
 (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
 (add-to-list 'interpreter-mode-alist '("python" . python-mode))
