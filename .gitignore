@@ -38,6 +38,9 @@ url/*
 ## org stuff
 .org-id-locations
 
+## ido stuff
+ido.last
+
 ## ignore mail/gnus cruft for those who keep mail in this directory
 drafts
 Mail
