@@ -12,6 +12,7 @@ tramp
 .smex-items
 ac-comphist.dat
 ido.last
+recentf
 
 ## directories
 backups/*
@@ -25,6 +26,7 @@ elpa/*
 src/*
 themes/*
 url/*
+.python-environments/*
 
 ## exported and encrypted files
 *gpg
