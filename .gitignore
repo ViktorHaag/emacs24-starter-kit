@@ -10,6 +10,7 @@ places
 .DS_Store
 tramp
 ac-comphist.dat
+recentf
 
 ## directories
 backups/*
