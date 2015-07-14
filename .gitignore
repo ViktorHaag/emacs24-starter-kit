@@ -9,7 +9,9 @@ places
 .svn
 .DS_Store
 tramp
+.smex-items
 ac-comphist.dat
+ido.last
 recentf
 
 ## directories
@@ -26,7 +28,6 @@ themes/*
 url/*
 .python-environments/*
 
-
 ## exported and encrypted files
 *gpg
 *el
@@ -38,9 +39,6 @@ url/*
 
 ## org stuff
 .org-id-locations
-
-## ido stuff
-ido.last
 
 ## ignore mail/gnus cruft for those who keep mail in this directory
 drafts
