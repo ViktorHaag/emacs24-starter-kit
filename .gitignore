@@ -23,6 +23,7 @@ image-dired/*
 elim/*
 doc/*
 elpa/*
+RCS/*
 src/*
 themes/*
 url/*
