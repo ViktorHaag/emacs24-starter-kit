@@ -1,0 +1,30 @@
+#+TITLE: Starter Kit Markdown
+#+OPTIONS: toc:nil num:nil ^:nil
+
+This is a local addition to the [[file::starter-kit.org.][Emacs Starter Kit]].
+
+* Starter Kit Markdown
+
+Support for editing Markdown files.
+
+** Check Dependencies
+
+Determine whether required packages are installed. If not, use ELPA to install
+them.
+#+begin_src emacs-lisp
+  (starter-kit-install-if-needed 'markdown-mode)
+#+end_src
+
+** Configuration for GFM mode by default
+   :PROPERTIES:
+   :CUSTOM_ID: markdown
+   :END:
+#+begin_src emacs-lisp
+  (autoload 'markdown-mode "markdown-mode"
+    "Major mode for editing Markdown files" t)
+  (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+
+  (autoload 'gfm-mode "markdown-mode"
+    "Major mode for editing GitHub Flavoured Markdown files" t)
+  (add-to-list 'auto-mode-alist '("\\.md\\'" . gfm-mode))
+#+end_src
