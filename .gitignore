@@ -24,7 +24,7 @@ image-dired/*
 elim/*
 doc/*
 elpa/*
-RCS/*
+**/RCS/*
 src/*
 themes/*
 url/*
